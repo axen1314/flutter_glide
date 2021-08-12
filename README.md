@@ -51,7 +51,5 @@ FlutterGlide提供Glide控件，其使用方式与官方Image控件类似：
     );
 ```
 
-# FAQ
-
 
 
