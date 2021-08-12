@@ -6,7 +6,7 @@ enum Resource { NETWORK, DRAWABLE, FILE, ASSET }
 class DrawableImageProvider extends ImageProvider<String> {
   final String drawable;
 
-  DrawableImageProvider(this.drawable);
+  const DrawableImageProvider(this.drawable);
 
   @override
   Map<String, dynamic> resolve() => {"resource": drawable, "resourceType": Resource.DRAWABLE.index};
@@ -16,7 +16,7 @@ class DrawableImageProvider extends ImageProvider<String> {
 class FileImageProvider extends ImageProvider<File> {
   final File file;
 
-  FileImageProvider(this.file);
+  const FileImageProvider(this.file);
 
   @override
   Map<String, dynamic> resolve() => {"resource": file.path, "resourceType": Resource.FILE.index};
@@ -26,7 +26,7 @@ class FileImageProvider extends ImageProvider<File> {
 class NetworkImageProvider extends ImageProvider<String> {
   final String url;
 
-  NetworkImageProvider(this.url);
+  const NetworkImageProvider(this.url);
 
   @override
   Map<String, dynamic> resolve() => {"resource": url, "resourceType": Resource.NETWORK.index};
@@ -37,7 +37,7 @@ class NetworkImageProvider extends ImageProvider<String> {
 class AssetImageProvider extends ImageProvider<String> {
   final String asset;
 
-  AssetImageProvider(this.asset);
+  const AssetImageProvider(this.asset);
   
   @override
   Map<String, dynamic> resolve() => {"resource": asset, "resourceType": Resource.ASSET.index};
@@ -45,5 +45,7 @@ class AssetImageProvider extends ImageProvider<String> {
 }
 
 abstract class ImageProvider<T> {
+  const ImageProvider();
+
   Map<String, dynamic> resolve();
 }
