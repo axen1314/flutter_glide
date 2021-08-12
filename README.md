@@ -1,4 +1,4 @@
-# flutter_glide
+# FlutterGlide
 
 基于Glide的Flutter图片加载控件，支持加载网络图片、Drawable资源、文件资源以及Asset文件夹资源
 
