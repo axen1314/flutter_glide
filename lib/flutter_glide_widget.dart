@@ -91,23 +91,25 @@ class _GlideState extends State<Glide> {
   double? _width;
   double? _height;
 
+  Map<String, dynamic>? _prevInfo;
+
   static const MethodChannel _channel =
   const MethodChannel('flutter_glide');
 
   @override
   void initState() {
     super.initState();
-    Map<String, dynamic> map = widget.image.resolve();
-    map["width"] = widget.width;
-    map["height"] = widget.height;
-    map["fit"] = widget.fit.index;
-    map["scaleRatio"] = widget.scaleRatio;
-    _channel.invokeMethod("create", map)
-        .then((value) => setState(() {
-      _textureId = value["textureId"];
-      _width = value["width"] * 1.0;
-      _height = value["height"] * 1.0;
-    }));
+    _create(_fetchWidgetInfo(widget));
+  }
+
+  @override
+  void didUpdateWidget(covariant Glide oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    Map<String, dynamic> info = _fetchWidgetInfo(widget);
+    if (_prevInfo == null || !_isSameInfo(_prevInfo!, info)) {
+      _textureId = null;
+      _create(info);
+    }
   }
 
   @override
@@ -128,6 +130,34 @@ class _GlideState extends State<Glide> {
           : Container(width: _width, height: _height, child: Texture(textureId: _textureId!)
       )
   );
+
+  void _create(Map<String, dynamic> map) {
+    _channel.invokeMethod("create", map)
+        .then((value) => setState(() {
+      _textureId = value["textureId"];
+      _width = value["width"] * 1.0;
+      _height = value["height"] * 1.0;
+      _prevInfo = _fetchWidgetInfo(widget);
+    }));
+  }
+
+  static Map<String, dynamic> _fetchWidgetInfo(Glide widget) {
+    Map<String, dynamic> map = widget.image.resolve();
+    map["width"] = widget.width;
+    map["height"] = widget.height;
+    map["fit"] = widget.fit.index;
+    map["scaleRatio"] = widget.scaleRatio;
+    return map;
+  }
+
+  static bool _isSameInfo(Map<String, dynamic> info1, Map<String, dynamic> info2) {
+    return info1["resource"] == info2["resource"]
+        && info1["resourceType"] == info2["resourceType"]
+        && info1["width"] == info2["width"]
+        && info1["height"] == info2["height"]
+        && info1["fit"] == info2["fit"]
+        && info1["scaleRatio"] == info2["scaleRatio"];
+  }
 
 }
 
