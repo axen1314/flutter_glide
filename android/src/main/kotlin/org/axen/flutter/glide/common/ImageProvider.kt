@@ -2,6 +2,10 @@ package org.axen.flutter.glide.common
 
 import android.content.Context
 import com.bumptech.glide.RequestBuilder
+import org.axen.flutter.glide.converter.AssetConverter
+import org.axen.flutter.glide.converter.DrawableConverter
+import org.axen.flutter.glide.converter.FileConverter
+import org.axen.flutter.glide.converter.NetworkConverter
 import org.axen.flutter.glide.enum.BoxFit
 import org.axen.flutter.glide.enum.Resource
 
@@ -15,6 +19,7 @@ abstract class AbstractProvider<T>(protected val context: Context) : ImageProvid
         converters[Resource.FILE] = FileConverter()
         converters[Resource.NETWORK] = NetworkConverter()
         converters[Resource.DRAWABLE] = DrawableConverter()
+        converters[Resource.ASSET] = AssetConverter()
     }
 
     override fun provide(info: GlideImage): T {

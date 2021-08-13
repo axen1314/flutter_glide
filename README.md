@@ -10,7 +10,7 @@ dependencies:
     flutter_glide:
         git:
             url: 'https://github.com/axen1314/flutter_glide.git'
-            ref: 'v1.0.1'
+            ref: 'v1.0.4'
 ```
 添加配置后，运行pub更新
 
@@ -50,8 +50,6 @@ FlutterGlide提供Glide控件，其使用方式与官方Image控件类似：
         height: 200
     );
 ```
-
-# FAQ
 
 
 

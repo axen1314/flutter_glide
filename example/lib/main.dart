@@ -12,6 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String url = "http://img.netbian.com/file/2020/0904/7cab180eca805cce596b6870cb4e1379.jpg";
 
   @override
   void initState() {
@@ -28,11 +29,9 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: Column(
               children: [
-                Image.network("http://img.netbian.com/file/2020/0904/7cab180eca805cce596b6870cb4e1379.jpg", width: 200, height: 200),
-                // Glide.network("http://img.netbian.com/file/2020/0904/7cab180eca805cce596b6870cb4e1379.jpg", width: 200, height: 200),
-                Container(
-                  child: Glide.drawable("R.drawable.ic_bar_back", width: 24, height: 24),
-                )
+                Image.network(url, width: 200, height: 200),
+                Glide.network(url, width: 200, height: 200),
+                Glide.drawable("R.drawable.ic_bar_back", width: 24, height: 24)
               ],
             )
         ),
