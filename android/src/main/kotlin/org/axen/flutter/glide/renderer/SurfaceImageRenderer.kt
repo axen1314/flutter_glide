@@ -18,12 +18,10 @@ class SurfaceImageRenderer(
 ): AbstractImageRenderer<Bitmap>(textureEntry, provider) {
 
     private var surface: Surface? = null
-//    private var bitmap: Bitmap? = null
 
     override fun release() {
         surface?.release()
-        // Glide会管理Bitmap的回收，因此不需要自己回收
-//        bitmap?.recycle()
+        textureEntry.release()
     }
 
     override fun onDraw(image: Bitmap, info: GlideImage, result: MethodChannel.Result) {
@@ -35,8 +33,6 @@ class SurfaceImageRenderer(
             val canvas = surface!!.lockCanvas(dstRect)
             canvas.drawBitmap(image, null, dstRect, null)//图片的绘制
             surface!!.unlockCanvasAndPost(canvas)
-//            bitmap?.recycle()
-//            bitmap = image
             val map = mapOf(
                 "textureId" to textureEntry.id(),
                 "width" to image.width / info.scaleRatio,

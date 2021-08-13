@@ -17,7 +17,7 @@ object GlideImagePool {
             width = 0
             height = 0
             resource = null
-            resource = Resource.NONE
+            resourceType = Resource.NONE
             fit = BoxFit.COVER
             scaleRatio = 3.0
             POOL.add(this)

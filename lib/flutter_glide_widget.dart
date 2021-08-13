@@ -99,16 +99,16 @@ class _GlideState extends State<Glide> {
   @override
   void initState() {
     super.initState();
-    _create(_fetchWidgetInfo(widget));
+    _load(_fetchWidgetInfo(widget));
   }
 
   @override
   void didUpdateWidget(covariant Glide oldWidget) {
     super.didUpdateWidget(oldWidget);
-    Map<String, dynamic> info = _fetchWidgetInfo(widget);
+    Map<String, dynamic> info = _fetchWidgetInfo(widget)..["textureId"] = _textureId;
     if (_prevInfo == null || !_isSameInfo(_prevInfo!, info)) {
       _textureId = null;
-      _create(info);
+      _load(info);
     }
   }
 
@@ -131,8 +131,8 @@ class _GlideState extends State<Glide> {
       )
   );
 
-  void _create(Map<String, dynamic> map) {
-    _channel.invokeMethod("create", map)
+  void _load(Map<String, dynamic> map) {
+    _channel.invokeMethod("load", map)
         .then((value) => setState(() {
       _textureId = value["textureId"];
       _width = value["width"] * 1.0;
