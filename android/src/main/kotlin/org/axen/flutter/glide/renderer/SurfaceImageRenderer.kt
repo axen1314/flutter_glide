@@ -2,8 +2,11 @@ package org.axen.flutter.glide.renderer
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.Rect
 import android.view.Surface
+import androidx.annotation.VisibleForTesting
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.view.TextureRegistry
 import org.axen.flutter.glide.common.AbstractImageRenderer
@@ -28,11 +31,8 @@ class SurfaceImageRenderer(
         val texture = textureEntry.surfaceTexture()
         if (surface == null) surface = Surface(texture)
         if (surface?.isValid == true) {
-            val dstRect = Rect(0, 0, image.width, image.height)
             texture.setDefaultBufferSize(image.width, image.height)
-            val canvas = surface!!.lockCanvas(dstRect)
-            canvas.drawBitmap(image, null, dstRect, null)//图片的绘制
-            surface!!.unlockCanvasAndPost(canvas)
+            draw(surface!!, image)
             val map = mapOf(
                 "textureId" to textureEntry.id(),
                 "width" to image.width / info.scaleRatio,
@@ -41,6 +41,18 @@ class SurfaceImageRenderer(
             postSuccess(result, map)
         } else {
             postError(result, errorString =  "Surface is invalid!")
+        }
+    }
+
+    companion object {
+        @VisibleForTesting
+        fun draw(surface: Surface, image: Bitmap) {
+            val dstRect = Rect(0, 0, image.width, image.height)
+            val canvas = surface.lockCanvas(dstRect)
+            // Fixed: PNG图片背景默认显示为白色的问题
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            canvas.drawBitmap(image, null, dstRect, null)//图片的绘制
+            surface.unlockCanvasAndPost(canvas)
         }
     }
 }

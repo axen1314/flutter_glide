@@ -2,6 +2,8 @@ package org.axen.flutter.glide.common
 
 import android.content.Context
 import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import org.axen.flutter.glide.converter.AssetConverter
 import org.axen.flutter.glide.converter.DrawableConverter
 import org.axen.flutter.glide.converter.FileConverter
