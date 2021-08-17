@@ -21,6 +21,8 @@ class Glide extends StatefulWidget {
   final BoxFit fit;
   /// 图片内间距
   final EdgeInsetsGeometry padding;
+  /// 图片外边距
+  final EdgeInsetsGeometry margin;
   /// 图片资源提供者
   final ImageProvider image;
   /// 图片渲染质量，默认为低质量
@@ -35,6 +37,7 @@ class Glide extends StatefulWidget {
     this.scaleRatio: 3.0,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
     this.filterQuality: FilterQuality.medium,
   }): this.image = NetworkImageProvider(url);
 
@@ -46,6 +49,7 @@ class Glide extends StatefulWidget {
     this.scaleRatio: 3.0,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
     this.filterQuality: FilterQuality.low,
   }): this.image = FileImageProvider(file);
 
@@ -57,6 +61,7 @@ class Glide extends StatefulWidget {
     this.scaleRatio: 3.0,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
     this.filterQuality: FilterQuality.low,
   }): this.image = DrawableImageProvider(drawable);
 
@@ -68,6 +73,7 @@ class Glide extends StatefulWidget {
     this.scaleRatio: 3.0,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
     this.filterQuality: FilterQuality.low,
   }): this.image = AssetImageProvider(asset);
 
@@ -79,6 +85,7 @@ class Glide extends StatefulWidget {
     this.scaleRatio: 3.0,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
     this.filterQuality: FilterQuality.low,
   }) : super(key: key);
 
@@ -124,6 +131,7 @@ class _GlideState extends State<Glide> {
       width: widget.width,
       height: widget.height,
       padding: widget.padding,
+      margin: widget.margin,
       alignment: Alignment.center,
       child: _textureId == null
           ? widget.placeholder??Container()
