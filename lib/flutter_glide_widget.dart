@@ -101,7 +101,7 @@ class _GlideState extends State<Glide> {
   Map<String, dynamic>? _prevInfo;
 
   static const MethodChannel _channel =
-  const MethodChannel('flutter_glide');
+  const MethodChannel('org.axen.flutter/flutter_glide');
 
   @override
   void initState() {
