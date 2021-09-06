@@ -1,7 +1,11 @@
 group 'org.axen.flutter.glide'
-version '1.0.1'
+version '1.0.2'
 
 apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+}
 
 dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
