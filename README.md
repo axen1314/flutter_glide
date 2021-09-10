@@ -5,12 +5,12 @@
 ## Getting Started
 
 在`pubspec.yaml`添加如下配置:
-```
+```yaml
 dependencies:
     flutter_glide:
         git:
             url: 'https://github.com/axen1314/flutter_glide.git'
-            ref: 'v1.1.0'
+            ref: 'v1.1.1'
 ```
 添加配置后，运行pub更新
 
