@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 
-public final class BitmapImageProvider extends AbstractProvider<Bitmap> {
+public final class GlideBitmapProvider extends GlideProvider<Bitmap> {
 
-    public BitmapImageProvider(@NonNull Context context) {
+    public GlideBitmapProvider(@NonNull Context context) {
         super(context);
     }
 
