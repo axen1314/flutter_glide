@@ -10,7 +10,7 @@ dependencies:
     flutter_glide:
         git:
             url: 'https://github.com/axen1314/flutter_glide.git'
-            ref: 'v1.1.1'
+            ref: 'v1.1.1-hotfix-1'
 ```
 添加配置后，运行pub更新
 
