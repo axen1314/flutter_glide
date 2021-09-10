@@ -8,9 +8,10 @@ import org.axen.flutter.texture.constant.SourceType;
 import org.axen.flutter.texture.renderer.ImageRenderer;
 import org.axen.flutter.texture.renderer.SurfaceBitmapRenderer;
 
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.view.TextureRegistry;
 
-public class FlutterGlidePlugin extends FlutterTexturePlugin {
+public class FlutterGlidePlugin extends FlutterTexturePlugin implements FlutterPlugin {
 
     @Override
     protected ImageRenderer getImageRenderer(
