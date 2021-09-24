@@ -29,8 +29,8 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: Column(
               children: [
-                Image.network(url, width: 200, height: 200),
-                Glide.network(url, width: 200, height: 200),
+                Image.network(url, width: 200, height: 200, fit: BoxFit.none),
+                Glide.network(url, width: 200, height: 200, fit: BoxFit.none),
                 Glide.drawable("R.drawable.ic_bar_back", width: 24, height: 24)
               ],
             )

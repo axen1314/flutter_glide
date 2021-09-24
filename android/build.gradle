@@ -1,10 +1,14 @@
 group 'org.axen.flutter.glide'
-version '1.0.3-hotfix-1'
+version '1.0.4'
 
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+    }
 }
 
 rootProject.allprojects {
@@ -15,5 +19,5 @@ rootProject.allprojects {
 
 dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    api 'com.github.axen1314:flutter_texture_plugin:v1.0.1'
+    api 'com.github.axen1314:flutter_texture_plugin:v1.0.3'
 }

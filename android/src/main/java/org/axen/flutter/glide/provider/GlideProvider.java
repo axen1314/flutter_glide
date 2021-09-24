@@ -19,7 +19,7 @@ import org.axen.flutter.texture.uri.URIParser;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class GlideProvider<T> implements ImageProvider<T> {
+public abstract class GlideProvider<T> implements ImageProvider<T, NativeImage> {
     protected Context context;
     private final Map<SourceType, URIParser> parsers = new HashMap<>();
 
@@ -42,14 +42,14 @@ public abstract class GlideProvider<T> implements ImageProvider<T> {
             throw new RuntimeException("Not support source type!");
         }
         Uri uri = parser.parse(info.getSource());
-        RequestBuilder<T> request = fit(build(), info.getFit()).load(uri);
+        RequestBuilder<T> request = build().load(uri);
         FutureTarget<T> futureTarget;
         double width = info.getWidth();
         double height = info.getHeight();
         if (width > 0 && height > 0) {
-            double scaleRatio = info.getScaleRatio();
-            double w = width * scaleRatio;
-            double h = height * scaleRatio;
+            final double density = context.getResources().getDisplayMetrics().density;
+            double w = width * density;
+            double h = height * density;
             futureTarget = request.submit((int) w, (int) h);
         } else {
             futureTarget = request.submit();
@@ -59,17 +59,4 @@ public abstract class GlideProvider<T> implements ImageProvider<T> {
     }
 
     protected abstract RequestBuilder<T> build();
-
-    public static <T> RequestBuilder<T> fit(RequestBuilder<T> builder, BoxFit fit) {
-        switch (fit) {
-            case COVER:
-                return builder.centerCrop();
-            case CONTAIN:
-            case FIT_WIDTH:
-            case FIT_HEIGHT:
-            case SCALE_DOWN:
-                return builder.fitCenter();
-        }
-        return builder;
-    }
 }

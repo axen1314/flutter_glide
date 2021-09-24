@@ -5,6 +5,7 @@ import android.content.Context;
 import org.axen.flutter.glide.provider.GlideBitmapProvider;
 import org.axen.flutter.texture.FlutterTexturePlugin;
 import org.axen.flutter.texture.constant.SourceType;
+import org.axen.flutter.texture.entity.NativeImage;
 import org.axen.flutter.texture.renderer.ImageRenderer;
 import org.axen.flutter.texture.renderer.SurfaceBitmapRenderer;
 
@@ -14,7 +15,7 @@ import io.flutter.view.TextureRegistry;
 public class FlutterGlidePlugin extends FlutterTexturePlugin implements FlutterPlugin {
 
     @Override
-    protected ImageRenderer getImageRenderer(
+    protected ImageRenderer<NativeImage> getImageRenderer(
             Context context,
             TextureRegistry.SurfaceTextureEntry entry,
             SourceType sourceType
