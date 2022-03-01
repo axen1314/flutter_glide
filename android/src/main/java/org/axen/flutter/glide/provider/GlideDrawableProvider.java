@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 
+import org.axen.flutter.texture.entity.NativeImage;
+
 public final class GlideDrawableProvider extends GlideProvider<Drawable> {
 
     public GlideDrawableProvider(@NonNull Context context) {
@@ -19,4 +21,10 @@ public final class GlideDrawableProvider extends GlideProvider<Drawable> {
         return Glide.with(this.context).asDrawable();
     }
 
+    @Override
+    public Drawable provide(NativeImage info) throws Exception {
+        Drawable drawable = super.provide(info);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        return drawable;
+    }
 }

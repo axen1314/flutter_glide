@@ -1,6 +1,6 @@
 import 'dart:io';
 
-enum Resource { NETWORK, DRAWABLE, FILE, ASSET }
+import 'entities.dart';
 
 /// Drawable图片资源
 class DrawableImageProvider extends ImageProvider<String> {
@@ -9,7 +9,7 @@ class DrawableImageProvider extends ImageProvider<String> {
   const DrawableImageProvider(this.drawable);
 
   @override
-  Map<String, dynamic> resolve() => {"resource": drawable, "resourceType": Resource.DRAWABLE.index};
+  NativeImage resolve() => NativeImage(drawable, SourceType.DRAWABLE);
 }
 
 /// 文件图片资源
@@ -19,7 +19,7 @@ class FileImageProvider extends ImageProvider<File> {
   const FileImageProvider(this.file);
 
   @override
-  Map<String, dynamic> resolve() => {"resource": file.path, "resourceType": Resource.FILE.index};
+  NativeImage resolve() => NativeImage(file.path, SourceType.FILE);
 }
 
 /// 网络图片资源
@@ -29,7 +29,7 @@ class NetworkImageProvider extends ImageProvider<String> {
   const NetworkImageProvider(this.url);
 
   @override
-  Map<String, dynamic> resolve() => {"resource": url, "resourceType": Resource.NETWORK.index};
+  NativeImage resolve() => NativeImage(url, SourceType.NETWORK);
 
 }
 
@@ -38,14 +38,13 @@ class AssetImageProvider extends ImageProvider<String> {
   final String asset;
 
   const AssetImageProvider(this.asset);
-  
+
   @override
-  Map<String, dynamic> resolve() => {"resource": asset, "resourceType": Resource.ASSET.index};
-  
+  NativeImage resolve() => NativeImage(asset, SourceType.ASSET);
 }
 
 abstract class ImageProvider<T> {
   const ImageProvider();
 
-  Map<String, dynamic> resolve();
+  NativeImage resolve();
 }
