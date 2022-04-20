@@ -11,9 +11,9 @@ class Glide extends StatefulWidget {
   /// Loading组件
   final Widget? placeholder;
   /// 图片宽度
-  final double width;
+  final double? width;
   /// 图片高度
-  final double height;
+  final double? height;
   /// 图片展示模式
   final BoxFit fit;
   /// 图片内间距
@@ -29,8 +29,8 @@ class Glide extends StatefulWidget {
   Glide.network(String url, {
     Key? key,
     this.placeholder,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
     this.margin: EdgeInsets.zero,
@@ -40,8 +40,8 @@ class Glide extends StatefulWidget {
   Glide.file(File file, {
     Key? key,
     this.placeholder,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
     this.margin: EdgeInsets.zero,
@@ -51,8 +51,8 @@ class Glide extends StatefulWidget {
   Glide.drawable(String drawable, {
     Key? key,
     this.placeholder,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
     this.margin: EdgeInsets.zero,
@@ -62,8 +62,8 @@ class Glide extends StatefulWidget {
   Glide.asset(String asset, {
     Key? key,
     this.placeholder,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
     this.margin: EdgeInsets.zero,
@@ -73,8 +73,8 @@ class Glide extends StatefulWidget {
   const Glide(this.image, {
     Key? key,
     this.placeholder,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.fit: BoxFit.contain,
     this.padding: EdgeInsets.zero,
     this.margin: EdgeInsets.zero,
@@ -125,7 +125,10 @@ class _GlideState extends State<Glide> {
   Widget build(BuildContext context) {
     Widget child;
     if (_imageResult == null) {
-      child = widget.placeholder??Container();
+      child = widget.placeholder??SizedBox(
+        width: widget.width??64.0,// 宽高要设置默认大小，否则在ListView中会报错
+        height: widget.height??64.0,
+      );
     } else {
       child = Container(
         width: _imageResult?.size.width??0,
@@ -177,8 +180,23 @@ class _GlideState extends State<Glide> {
   /// @param width 图片真实宽度
   /// @param height 图片真实高度
   Size _caculateImageWidgetSize(int w, int h) {
-    final double cWidth = widget.width;
-    final double cHeight = widget.height;
+    final double? wWidth = widget.width;
+    final double? wHeight = widget.height;
+    final double cWidth;
+    final double cHeight;
+    if (wWidth == null && wHeight == null) {
+      cWidth = w * 1.0;
+      cHeight = h * 1.0;
+    } else if (wWidth == null && wHeight != null) {
+      cHeight = wHeight * 1.0;
+      cWidth = wHeight * w / h;
+    } else if (wWidth != null && wHeight == null) {
+      cWidth = wWidth;
+      cHeight = cWidth * h / w;
+    } else {
+      cWidth = wWidth!;
+      cHeight = wHeight!;
+    }
     final double width = w * 1.0;
     final double height = h * 1.0;
     if ((width <= cWidth && height <= cHeight)) {

@@ -54,9 +54,8 @@ class _MyAppState extends State<MyApp> {
               double size = (64 + 40 * i).toDouble();
               children.add(
                   Glide.network(
-                      urlList[index],
-                      width: size,
-                      height: size
+                    urlList[index],
+                    height:size,
                   )
               );
             }
