@@ -1,5 +1,5 @@
 group 'org.axen.flutter.glide'
-version '1.1.4'
+version '1.1.5'
 
 apply plugin: 'com.android.library'
 
@@ -21,5 +21,5 @@ rootProject.allprojects {
 dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation "com.github.zjupure:webpdecoder:2.0.4.12.0"
-    api 'com.github.axen1314:flutter_texture_plugin:v1.1.0'
+    api 'com.github.axen1314:flutter_texture_plugin:v1.1.1'
 }
